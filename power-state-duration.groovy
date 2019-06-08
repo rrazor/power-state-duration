@@ -22,7 +22,7 @@ preferences {
     }
     section("API information:") {
         input("apiUrl", "text", title: "POST URL")
-        input("apiAuthHeader", "text", title: "HTTP Authorization: header value")
+        input("apiAuthHeader", "text", title: "HTTP x-api-key: header value")
     }
 }
 
@@ -87,7 +87,7 @@ def onDeviceEvent(evt) {
 }
 
 def publishEvent (eventJson) {
-    def params = [uri: apiUrl, headers: ["Authorization": apiAuthHeader], body: eventJson]
+    def params = [uri: apiUrl, headers: ["x-api-key": apiAuthHeader], body: eventJson]
 
     try {
         httpPostJson(params) { resp -> }
